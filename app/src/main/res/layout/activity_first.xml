@@ -63,6 +63,8 @@
                 android:layout_height="308dp">
 
                 <EditText
+                    android:editable="false"
+                    android:inputType="none"
                     android:id="@+id/et_laps"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
