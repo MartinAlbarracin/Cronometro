@@ -128,6 +128,7 @@ public class FirstActivity extends BaseActivity {
 					mBtnStart.setEnabled(true);
 					mBtnStart.setText("Start");
 					mBtnLap.setEnabled(true);
+					mLapCounter=1;
 				}
 			}
 		});

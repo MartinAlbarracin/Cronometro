@@ -91,7 +91,7 @@ public class Chronometer implements Runnable{
             int hours = (int) ((since / (MILLS_TO_HOURS))); //this does not reset to 0!
             int millis = (int) since % 1000; //the last 3 digits of millisecs
 
-            ((FirstActivity) mContext).updateTimerText(String.format("%02d:%02d:%02d:%03d"
+            ((SecondActivity) mContext).updateTimerText(String.format("%02d:%02d:%02d:%03d"
                     , hours, minutes, seconds, millis));
 
             //Sleep the thread for a short amount, to prevent high CPU usage!
