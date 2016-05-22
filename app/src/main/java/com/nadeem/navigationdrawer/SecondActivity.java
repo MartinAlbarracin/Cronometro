@@ -36,18 +36,16 @@ public class SecondActivity extends BaseActivity {
 				.setStyleResId(R.style.BetterPickersDialogFragment);
 		hpb.show();
 
-		Log.d("data timepicker", hpb.toString());
 
 		texto = (TextView) findViewById(R.id.tv);
 		barra= (ProgressBar) findViewById(R.id.circularProgressbar);
 		boton = (ImageButton) findViewById(R.id.imageButton);
-
+		barra.setMax(30000);
 		boton.setOnClickListener(new View.OnClickListener() {
 			@Override
 			public void onClick(View v) {
-				barra.setProgress(100);
-				CountDownTimer myCountDownTimer = new MyCountDownTimer(31000, 1000);
-				barra.setMax(30000);
+				CountDownTimer myCountDownTimer = new MyCountDownTimer(30000, 10);
+
 				myCountDownTimer.start();
 
 			}
