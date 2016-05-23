@@ -38,6 +38,7 @@ public class BaseActivity extends AppCompatActivity {
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.drawer);
+		getSupportActionBar().setDisplayHomeAsUpEnabled(true);
 		// if (savedInstanceState == null) {
 		// // on first time display view for first nav item
 		// // displayView(0);
@@ -108,6 +109,8 @@ public class BaseActivity extends AppCompatActivity {
 		}
 	}
 
+
+
 	@Override
 	public boolean onCreateOptionsMenu(Menu menu) {
 		// getSupportMenuInflater().inflate(R.menu.main, menu);
@@ -155,9 +158,9 @@ public class BaseActivity extends AppCompatActivity {
 			startActivity(intent1);
 			finish();// finishes the current activity
 			break;
-		// case 2:
-		// Intent intent2 = new Intent(this, third.class);
-		// startActivity(intent2);
+		 case 2:
+			Intent intent2 = new Intent(this, ThirdActivity.class);
+		 	startActivity(intent2);
 		// finish();
 		// break;
 		// case 3:
@@ -209,4 +212,6 @@ public class BaseActivity extends AppCompatActivity {
 		// Pass any configuration change to the drawer toggls
 		mDrawerToggle.onConfigurationChanged(newConfig);
 	}
+
+
 }
