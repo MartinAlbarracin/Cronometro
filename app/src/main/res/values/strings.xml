@@ -11,16 +11,14 @@
     <string-array name="nav_drawer_items">
         <item>Cronometro</item>
         <item>Temporizador</item>
-        <item>Cronometro Repetitivo</item>
         <!--<item>Fourth</item>
         <item>Fifth</item>
         <item>Sixth</item> -->
     </string-array>
 
     <array name="nav_drawer_icons">
-        <item>@drawable/cronometro</item>
+        <item>@drawable/ic_launcher</item>
         <item>@drawable/temporizador</item>
-        <item>@drawable/home</item>
         <!--<item>@drawable/ic_launcher</item>
                 <item>@drawable/ic_launcher</item>
                 <item>@drawable/ic_launcher</item>
