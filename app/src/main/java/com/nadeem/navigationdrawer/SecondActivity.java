@@ -2,6 +2,8 @@ package com.nadeem.navigationdrawer;
 
 import android.animation.ObjectAnimator;
 import android.content.res.TypedArray;
+import android.media.AudioManager;
+import android.media.ToneGenerator;
 import android.os.Bundle;
 import android.os.CountDownTimer;
 import android.util.Log;
@@ -30,6 +32,7 @@ public class SecondActivity extends BaseActivity implements HmsPickerDialogFragm
 	private CountDownTimer myCountDownTimer;
 	int flag = 0, flag1 = 0;
 	public long res;
+	private ToneGenerator tg;
 
 
 	@Override
@@ -44,6 +47,7 @@ public class SecondActivity extends BaseActivity implements HmsPickerDialogFragm
 		trash = (ImageButton) findViewById(R.id.botontrash);
 		barra = (ProgressBar) findViewById(R.id.circularProgressbar);
 		play = (ImageButton) findViewById(R.id.imageButton);
+		tg = new ToneGenerator(AudioManager.STREAM_ALARM, 100);
 		barra.setMax(30000);
 
 		play.setOnClickListener(new View.OnClickListener()
@@ -55,7 +59,7 @@ public class SecondActivity extends BaseActivity implements HmsPickerDialogFragm
 				if (flag == 0) {
 					play.setImageResource(R.drawable.resume);
 					Log.d("DEBUG MARTIN ALBARRACIN", "begin timer");
-					myCountDownTimer = new MyCountDownTimer((int) res, 10);
+					myCountDownTimer = new MyCountDownTimer((int) res, 1);
 					myCountDownTimer.start();
 					flag = 3;
 				} else if (flag == 1) {
@@ -67,7 +71,7 @@ public class SecondActivity extends BaseActivity implements HmsPickerDialogFragm
 					int sec = Integer.parseInt(acum.substring(6, 8));
 					long resultado = ((min * MILLIS_TO_MINUTES) + (sec * 1000) + (hou * MILLS_TO_HOURS));
 
-					myCountDownTimer = new MyCountDownTimer((int) resultado, 10);
+					myCountDownTimer = new MyCountDownTimer((int) resultado, 1);
 					myCountDownTimer.start();
 					flag = 3;
 				} else {
@@ -117,7 +121,7 @@ public class SecondActivity extends BaseActivity implements HmsPickerDialogFragm
 
 			texto.setText(String.format("%02d:%02d:%02d"
 					, hours, minutes, seconds));
-			barra.setProgress((int) millisUntilFinished);
+			barra.setProgress(((int) millisUntilFinished)-1000);
 		}
 
 		public void onCancel(long millisUntilFinished) {
@@ -127,10 +131,13 @@ public class SecondActivity extends BaseActivity implements HmsPickerDialogFragm
 		@Override
 		public void onFinish() {
 
+			play.setImageResource(R.drawable.play);
 			texto.setText("End");
 			barra.setProgress(0);
 			flag = 0;
+			tg.startTone(ToneGenerator.TONE_CDMA_ALERT_CALL_GUARD, 200);
 		}
+
 
 	}
 
@@ -138,12 +145,14 @@ public class SecondActivity extends BaseActivity implements HmsPickerDialogFragm
 	public void onDialogHmsSet(int reference, boolean isNegative, int hours, int minutes,
 							   int seconds) {
 
-		res = ((minutes * MILLIS_TO_MINUTES) + (seconds * 1000) + (hours * MILLS_TO_HOURS));
-		barra.setMax((int) res);
-		barra.setProgress((int) res);
+		res = ((minutes * MILLIS_TO_MINUTES) + ((seconds)*1000) + (hours * MILLS_TO_HOURS));
+
+		barra.setMax(((int) res)-1000);
+		barra.setProgress(((int) res)-1000);
+		Log.d("DEBUG MARTIN ALBARRACIN", String.valueOf(res));
 		texto.setText(String.format("%02d:%02d:%02d"
 				, hours, minutes, seconds));
-		myCountDownTimer = new MyCountDownTimer((int) res, 10);
+		myCountDownTimer = new MyCountDownTimer((int) res, 1);
 
 
 	}
